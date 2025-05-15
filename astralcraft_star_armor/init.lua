@@ -255,23 +255,25 @@ core.register_craft({
   output = "astralcraft:star_charm",
 })
 
-local settings = astralcraft.settings.shooting_star
-astralcraft.register_shooting_star_spawner({
-  interval_min = settings.interval_min,
-  interval_max = settings.interval_max,
-  chance_min = settings.chance_min + 10,
-  chance_max = settings.chance_max,
-  node_radius = settings.node_radius,
-  chance_step = settings.chance_step + 5,
-  y_min = settings.y_min,
-  y_max = settings.y_max,
-  is_player_eligible = function(self,player)
-    local equipment = armor:get_weared_armor_elements(player)
-    for element,armor in pairs(equipment) do
-      if armor == "astralcraft:star_charm" then
-        return true
+if asuna.content.stratosphere.astralcraft then
+  local settings = astralcraft.settings.shooting_star
+  astralcraft.register_shooting_star_spawner({
+    interval_min = settings.interval_min,
+    interval_max = settings.interval_max,
+    chance_min = settings.chance_min + 10,
+    chance_max = settings.chance_max,
+    node_radius = settings.node_radius,
+    chance_step = settings.chance_step + 5,
+    y_min = settings.y_min,
+    y_max = settings.y_max,
+    is_player_eligible = function(self,player)
+      local equipment = armor:get_weared_armor_elements(player)
+      for element,armor in pairs(equipment) do
+        if armor == "astralcraft:star_charm" then
+          return true
+        end
       end
-    end
-    return false
-  end,
-})
+      return false
+    end,
+  })
+end
